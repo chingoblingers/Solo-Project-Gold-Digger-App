@@ -17,16 +17,18 @@ if(req.url === "/"){
 filePath = path.join(publicFolder, "index.html")
 }else if (req.url === "/stream") {
  res.statusCode = 200   
- res.setHeader("Content-Type", "event/stream")
+ res.setHeader("Content-Type", "text/event-stream")
  res.setHeader("Cache-Control", "no-cache")
  res.setHeader("Connection", "keep-alive")
 
 setInterval(() => {
     currentprice = getNextPrice(currentprice)
     res.write(
-        ` data: ${JSON.stringify({event: "gold-price-update", price: currentprice})}\n\n`
+        `data: ${JSON.stringify({event: "gold-price-update", price: currentprice})}\n\n`
     )
 }, 3000);
+
+return
 
 }else {
 filePath = path.join(publicFolder, req.url)
