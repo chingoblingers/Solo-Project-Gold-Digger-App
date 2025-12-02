@@ -1,0 +1,9 @@
+function toISOString() { [native code] } - Invested £null at £497/oz
+function toISOString() { [native code] } - Invested £null at £29/oz
+2025-12-02T05:00:22.462Z - Invested £null at £651/oz
+2025-12-02T05:01:29.848Z - Invested £null at £773/oz
+2025-12-02T05:01:44.029Z - Invested £23 at £----.--/oz
+2025-12-02T05:01:44.531Z - Invested £23 at £----.--/oz
+2025-12-02T05:01:58.461Z - Invested £23 at £989/oz
+2025-12-02T05:01:58.957Z - Invested £23 at £989/oz
+2025-12-02T05:02:19.107Z - Invested £88 at £934/oz

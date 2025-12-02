@@ -13,9 +13,9 @@ const server = http.createServer(async (req, res) => {
 const publicFolder = path.join(__dirname, "public")
 let filePath = ""
 
-if(req.url === "/"){
+if(req.url === "/" && req.method === "GET"){
 filePath = path.join(publicFolder, "index.html")
-}else if (req.url === "/stream") {
+}else if (req.url === "/stream" && req.method === "GET") {
  res.statusCode = 200   
  res.setHeader("Content-Type", "text/event-stream")
  res.setHeader("Cache-Control", "no-cache")
@@ -30,7 +30,25 @@ setInterval(() => {
 
 return
 
-}else {
+} else if (req.url === "/purchase" && req.method === "POST"){
+let body = ""
+
+for await (const chunk of req){
+    body += chunk 
+}
+
+const postedData = JSON.parse(body)
+const {amount, price} = postedData
+const timestamp = new Date().toISOString()
+const postLine = `${timestamp} - Invested £${amount} at £${price}/oz\n`
+await fs.appendFile("purchases.txt", postLine, "utf8")
+
+res.setHeader("Content-Type", "application/json")
+res.statusCode = 200
+res.end(JSON.stringify({message: "Purchase Logged"}))
+return
+
+} else {
 filePath = path.join(publicFolder, req.url)
 }
 
